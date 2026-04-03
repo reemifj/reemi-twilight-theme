@@ -1,0 +1,11 @@
+{# ═══ LOYALTY PAGE ═══ #}
+{% extends "layouts/master.twig" %}
+{% block title %}{{ 'نقاط الولاء' | trans }} | {{ store.name }}{% endblock %}
+{% block content %}
+<div class="page-loyalty">
+    <div class="container">
+        <div class="page-header page-header--simple"><h1>{{ 'نقاط الولاء' | trans }}</h1></div>
+        <salla-loyalty-program></salla-loyalty-program>
+    </div>
+</div>
+{% endblock %}

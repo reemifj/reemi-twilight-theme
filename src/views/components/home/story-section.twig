@@ -1,0 +1,17 @@
+{# ═══════════════ STORY / ABOUT SECTION ═══════════════ #}
+<section class="story reveal">
+    <div class="story__inner container">
+        <div class="story__text">
+            <span class="section-header__tag">{{ 'قصتنا' | trans }}</span>
+            <h2 class="story__title">{{ theme.settings.story_title_ar | default('مجوهرات ريمي — إرث من الأناقة والإبداع') }}</h2>
+            <p>{{ theme.settings.story_text_ar | default('نؤمن في مجوهرات ريمي أن كل قطعة تحكي قصة فريدة. بدأت رحلتنا من شغف حقيقي بالجمال والحرفية العالية، لنقدم لك مجوهرات تجمع بين الأصالة والمعاصرة.') }}</p>
+            <p>{{ 'كل تصميم يمر بمراحل دقيقة من الابتكار والتنفيذ على أيدي أمهر الحرفيين، باستخدام أجود أنواع الأحجار الكريمة والمعادن النفيسة.' | trans }}</p>
+            <a href="{{ 'about' | page_url }}" class="btn btn--outline-light">{{ 'اقرئي المزيد' | trans }}</a>
+        </div>
+        <div class="story__img">
+            {% if store.logo %}
+                <img src="{{ store.logo }}" alt="{{ store.name }}" loading="lazy">
+            {% endif %}
+        </div>
+    </div>
+</section>

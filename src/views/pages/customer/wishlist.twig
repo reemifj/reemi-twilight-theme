@@ -1,0 +1,28 @@
+{# ═══════════════ WISHLIST PAGE ═══════════════ #}
+{% extends "layouts/master.twig" %}
+
+{% block title %}{{ 'المفضلة' | trans }} | {{ store.name }}{% endblock %}
+
+{% block content %}
+<div class="page-wishlist">
+    <div class="container">
+        <div class="page-header page-header--simple">
+            <h1>{{ 'قائمة الأمنيات' | trans }}</h1>
+        </div>
+
+        {% if wishlist_products | length > 0 %}
+            <div class="products-grid products-grid--4">
+                {% for product in wishlist_products %}
+                    {% include 'components/product/card.twig' with {'product': product} %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="products-empty">
+                <i class="sicon-heart"></i>
+                <p>{{ 'قائمة الأمنيات فارغة' | trans }}</p>
+                <a href="{{ 'products' | page_url }}" class="btn btn--primary">{{ 'تسوّقي الآن' | trans }}</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

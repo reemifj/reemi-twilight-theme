@@ -1,0 +1,46 @@
+{# ═══════════════ HERO SLIDER ═══════════════ #}
+<section class="hero" id="hero">
+    <div class="hero__slides">
+        {# Slides pulled from Salla slider or hardcoded #}
+        {% if store.slider and store.slider | length > 0 %}
+            {% for slide in store.slider %}
+                <div class="hero__slide {{ loop.first ? 'active' : '' }}">
+                    <div class="hero__overlay"></div>
+                    <img class="hero__bg" src="{{ slide.image }}" alt="{{ slide.title }}" loading="{{ loop.first ? 'eager' : 'lazy' }}">
+                </div>
+            {% endfor %}
+        {% else %}
+            {# Default slides when no slider configured #}
+            <div class="hero__slide active">
+                <div class="hero__overlay"></div>
+                <div class="hero__bg hero__bg--gradient"></div>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="hero__content container">
+        <span class="hero__tag">{{ store.name }} — SINCE {{ store.created_at | date('Y') }}</span>
+        <h1 class="hero__title">{{ theme.settings.hero_title_ar | default('حيث يلتقي الفن بالأناقة') }}</h1>
+        <p class="hero__subtitle">{{ theme.settings.hero_subtitle_ar | default('اكتشفي تشكيلتنا الفريدة من المجوهرات الراقية') }}</p>
+        <div class="hero__cta">
+            <a href="{{ 'products' | page_url }}" class="btn btn--primary">
+                {{ theme.settings.hero_cta_text | default('تسوّقي الآن') }}
+                <i class="sicon-keyboard_arrow_left"></i>
+            </a>
+            {% if store.categories | length > 0 %}
+                <a href="{{ store.categories | first | default('#') }}" class="btn btn--outline-light">
+                    {{ 'استكشفي المجموعات' | trans }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    {# Slide indicators #}
+    {% if store.slider and store.slider | length > 1 %}
+        <div class="hero__indicators">
+            {% for slide in store.slider %}
+                <span class="{{ loop.first ? 'active' : '' }}" data-slide="{{ loop.index0 }}"></span>
+            {% endfor %}
+        </div>
+    {% endif %}
+</section>

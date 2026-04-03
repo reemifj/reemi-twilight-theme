@@ -1,0 +1,14 @@
+{% extends "layouts/master.twig" %}
+{% block title %}{{ brand.name }} | {{ store.name }}{% endblock %}
+{% block content %}
+<div class="page-brand-single">
+    <div class="container">
+        <div class="page-header page-header--simple"><h1>{{ brand.name }}</h1></div>
+        <div class="products-grid products-grid--4">
+            {% for product in products %}
+                {% include 'components/product/card.twig' with {'product': product} %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

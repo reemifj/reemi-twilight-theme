@@ -1,0 +1,166 @@
+{# ═══════════════ SINGLE PRODUCT PAGE ═══════════════ #}
+{% extends "layouts/master.twig" %}
+
+{% block title %}{{ product.name }} | {{ store.name }}{% endblock %}
+
+{% block content %}
+<div class="page-product-single">
+    <div class="container">
+        {# Breadcrumb #}
+        <nav class="breadcrumb">
+            <a href="{{ store.url }}">{{ 'الرئيسية' | trans }}</a>
+            <i class="sicon-keyboard_arrow_left"></i>
+            {% if product.category %}
+                <a href="{{ product.category.url }}">{{ product.category.name }}</a>
+                <i class="sicon-keyboard_arrow_left"></i>
+            {% endif %}
+            <span>{{ product.name }}</span>
+        </nav>
+
+        <div class="product-single">
+            {# ═══ IMAGE GALLERY ═══ #}
+            <div class="product-single__gallery">
+                <div class="product-single__main-img">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" id="mainProductImg">
+                    {% if product.promotion %}
+                        <span class="product-card__badge product-card__badge--sale">
+                            {{ product.promotion.value }}{{ product.promotion.is_percentage ? '%' : '' }} {{ 'خصم' | trans }}
+                        </span>
+                    {% endif %}
+                </div>
+                {% if product.images | length > 1 %}
+                    <div class="product-single__thumbnails">
+                        {% for image in product.images %}
+                            <button class="product-single__thumb {{ loop.first ? 'active' : '' }}"
+                                    onclick="changeMainImage('{{ image.url }}', this)">
+                                <img src="{{ image.url }}" alt="{{ product.name }}" loading="lazy">
+                            </button>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            {# ═══ PRODUCT DETAILS ═══ #}
+            <div class="product-single__details">
+                {% if product.brand %}
+                    <span class="product-single__brand">{{ product.brand.name }}</span>
+                {% endif %}
+
+                <h1 class="product-single__name">{{ product.name }}</h1>
+
+                {# Price #}
+                <div class="product-single__price">
+                    <salla-product-availability product-id="{{ product.id }}">
+                        <span class="product-single__current-price">{{ product.price | money }}</span>
+                        {% if product.sale_price %}
+                            <span class="product-single__old-price">{{ product.regular_price | money }}</span>
+                            <span class="product-single__discount">
+                                {{ product.promotion.value }}{{ product.promotion.is_percentage ? '%' : '' }} {{ 'خصم' | trans }}
+                            </span>
+                        {% endif %}
+                    </salla-product-availability>
+                </div>
+
+                {# Rating #}
+                {% if product.rating %}
+                    <div class="product-single__rating">
+                        <salla-rating-stars value="{{ product.rating.stars }}"></salla-rating-stars>
+                        <span>({{ product.rating.count }} {{ 'تقييم' | trans }})</span>
+                    </div>
+                {% endif %}
+
+                {# Description #}
+                {% if product.description %}
+                    <div class="product-single__desc">
+                        {{ product.description | raw }}
+                    </div>
+                {% endif %}
+
+                {# Product Options (size, color, etc.) #}
+                <salla-product-options product-id="{{ product.id }}"></salla-product-options>
+
+                {# Quantity & Add to Cart #}
+                <div class="product-single__actions">
+                    <salla-quantity-input product-id="{{ product.id }}"></salla-quantity-input>
+                    <salla-add-product-button product-id="{{ product.id }}" class="btn btn--primary btn--full">
+                        <i class="sicon-shopping-bag"></i>
+                        {{ 'أضيفي إلى السلة' | trans }}
+                    </salla-add-product-button>
+                </div>
+
+                {# Buy Now #}
+                <salla-buy-now-button product-id="{{ product.id }}" class="btn btn--outline btn--full">
+                    {{ 'اشتري الآن' | trans }}
+                </salla-buy-now-button>
+
+                {# Wishlist #}
+                <button class="product-single__wishlist" onclick="salla.wishlist.toggle({{ product.id }})">
+                    <i class="sicon-heart"></i>
+                    {{ 'أضيفي للمفضلة' | trans }}
+                </button>
+
+                {# Specs / Metadata #}
+                {% if product.metadata | length > 0 %}
+                    <div class="product-single__specs">
+                        <h3>{{ 'المواصفات' | trans }}</h3>
+                        {% for meta in product.metadata %}
+                            <div class="product-single__spec-row">
+                                <span>{{ meta.key }}</span>
+                                <span>{{ meta.value }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# Share #}
+                <div class="product-single__share">
+                    <span>{{ 'مشاركة' | trans }}:</span>
+                    <salla-social-share></salla-social-share>
+                </div>
+            </div>
+        </div>
+
+        {# ═══ PRODUCT TABS ═══ #}
+        <div class="product-tabs">
+            <div class="product-tabs__nav">
+                <button class="product-tabs__btn active" data-tab="description">{{ 'الوصف' | trans }}</button>
+                <button class="product-tabs__btn" data-tab="reviews">{{ 'التقييمات' | trans }}</button>
+            </div>
+            <div class="product-tabs__content">
+                <div class="product-tabs__panel active" id="tab-description">
+                    {{ product.description | raw }}
+                </div>
+                <div class="product-tabs__panel" id="tab-reviews">
+                    {% include 'components/product/comments.twig' %}
+                </div>
+            </div>
+        </div>
+
+        {# ═══ RELATED PRODUCTS ═══ #}
+        {% if product.related_products | length > 0 %}
+            <div class="related-products reveal">
+                <div class="section-header">
+                    <span class="section-header__tag">{{ 'قد يعجبك أيضاً' | trans }}</span>
+                    <h2 class="section-header__title">{{ 'منتجات مشابهة' | trans }}</h2>
+                    <div class="section-header__line"></div>
+                </div>
+                <div class="products-grid products-grid--4">
+                    {% for related in product.related_products | slice(0, 4) %}
+                        {% include 'components/product/card.twig' with {'product': related} %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function changeMainImage(url, thumb) {
+    document.getElementById('mainProductImg').src = url;
+    document.querySelectorAll('.product-single__thumb').forEach(t => t.classList.remove('active'));
+    thumb.classList.add('active');
+}
+</script>
+{% endblock %}

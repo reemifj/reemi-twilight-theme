@@ -1,0 +1,42 @@
+{# ═══════════════ HOME PAGE ═══════════════ #}
+{% extends "layouts/master.twig" %}
+
+{% block title %}{{ store.name }} | {{ 'الصفحة الرئيسية' | trans }}{% endblock %}
+
+{% block content %}
+
+    {# ═══ HERO SLIDER ═══ #}
+    {% include 'components/home/hero-slider.twig' %}
+
+    {# ═══ CATEGORIES ═══ #}
+    {% include 'components/home/categories-grid.twig' %}
+
+    {# ═══ FEATURED PRODUCTS - Salla Built-in Component ═══ #}
+    {% hook 'home:featured-products' %}
+
+    {# ═══ BANNER ═══ #}
+    {% hook 'home:fixed-banner' %}
+
+    {# ═══ PRODUCTS SLIDER - Salla Built-in Component ═══ #}
+    {% hook 'home:products-slider' %}
+
+    {# ═══ STORY SECTION ═══ #}
+    {% if theme.settings.show_story_section %}
+        {% include 'components/home/story-section.twig' %}
+    {% endif %}
+
+    {# ═══ STORE FEATURES ═══ #}
+    {% hook 'home:store-features' %}
+
+    {# ═══ TESTIMONIALS ═══ #}
+    {% hook 'home:testimonials' %}
+
+    {# ═══ INSTAGRAM ═══ #}
+    {% if theme.settings.show_instagram_section %}
+        {% hook 'home:square-photos' %}
+    {% endif %}
+
+    {# ═══ NEWSLETTER ═══ #}
+    {% include 'components/home/newsletter.twig' %}
+
+{% endblock %}

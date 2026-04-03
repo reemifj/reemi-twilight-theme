@@ -1,0 +1,103 @@
+{# ═══════════════ FOOTER ═══════════════ #}
+<footer class="footer">
+    <div class="footer__inner container">
+        <div class="footer__grid">
+            {# Brand Column #}
+            <div class="footer__brand">
+                <div class="footer__logo">
+                    {% if store.logo %}
+                        <img src="{{ store.logo }}" alt="{{ store.name }}">
+                    {% endif %}
+                    <span class="footer__logo-text">{{ store.name }}</span>
+                </div>
+                <p class="footer__desc">
+                    {{ store.description | default('نصنع الأناقة بكل تفاصيلها. مجوهرات ريمي وجهتك الأولى للمجوهرات الراقية في المملكة العربية السعودية.') }}
+                </p>
+                <div class="footer__social">
+                    {% if theme.settings.instagram_url %}
+                        <a href="{{ theme.settings.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">
+                            <i class="sicon-instagram"></i>
+                        </a>
+                    {% endif %}
+                    {% if theme.settings.twitter_url %}
+                        <a href="{{ theme.settings.twitter_url }}" target="_blank" rel="noopener" aria-label="Twitter">
+                            <i class="sicon-twitter"></i>
+                        </a>
+                    {% endif %}
+                    {% if store.social.snapchat %}
+                        <a href="{{ store.social.snapchat }}" target="_blank" rel="noopener" aria-label="Snapchat">
+                            <i class="sicon-snapchat"></i>
+                        </a>
+                    {% endif %}
+                    {% if store.social.tiktok %}
+                        <a href="{{ store.social.tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">
+                            <i class="sicon-tiktok"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            {# Shopping Links #}
+            <div class="footer__col">
+                <h4>{{ 'التسوّق' | trans }}</h4>
+                <ul>
+                    {% for category in store.categories %}
+                        <li><a href="{{ category.url }}">{{ category.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            {# About Links #}
+            <div class="footer__col">
+                <h4>{{ 'عن ريمي' | trans }}</h4>
+                <ul>
+                    <li><a href="{{ 'about' | page_url }}">{{ 'قصتنا' | trans }}</a></li>
+                    <li><a href="{{ 'blog' | page_url }}">{{ 'المدونة' | trans }}</a></li>
+                    <li><a href="{{ 'faq' | page_url }}">{{ 'الأسئلة الشائعة' | trans }}</a></li>
+                    <li><a href="{{ 'privacy' | page_url }}">{{ 'سياسة الخصوصية' | trans }}</a></li>
+                    <li><a href="{{ 'terms' | page_url }}">{{ 'الشروط والأحكام' | trans }}</a></li>
+                    <li><a href="{{ 'refund-exchange' | page_url }}">{{ 'سياسة الإرجاع' | trans }}</a></li>
+                </ul>
+            </div>
+
+            {# Account Links #}
+            <div class="footer__col">
+                <h4>{{ 'حسابي' | trans }}</h4>
+                <ul>
+                    {% if customer %}
+                        <li><a href="{{ 'profile' | page_url }}">{{ 'حسابي' | trans }}</a></li>
+                        <li><a href="{{ 'orders' | page_url }}">{{ 'طلباتي' | trans }}</a></li>
+                    {% else %}
+                        <li><a href="#" onclick="salla.event.dispatch('login::open')">{{ 'تسجيل الدخول' | trans }}</a></li>
+                    {% endif %}
+                    <li><a href="{{ 'cart' | page_url }}">{{ 'سلة المشتريات' | trans }}</a></li>
+                    <li><a href="{{ 'wishlist' | page_url }}">{{ 'قائمة الأمنيات' | trans }}</a></li>
+                </ul>
+            </div>
+
+            {# Contact #}
+            <div class="footer__col footer__contact">
+                <h4>{{ 'تواصلي معنا' | trans }}</h4>
+                {% if store.contacts.phone %}
+                    <p><i class="sicon-phone"></i> {{ store.contacts.phone }}</p>
+                {% endif %}
+                {% if store.contacts.email %}
+                    <p><i class="sicon-envelope"></i> {{ store.contacts.email }}</p>
+                {% endif %}
+                {% if store.address %}
+                    <p><i class="sicon-location"></i> {{ store.address }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {# Bottom Bar #}
+        <div class="footer__bottom">
+            <span>© {{ 'now' | date('Y') }} {{ store.name }}. {{ 'جميع الحقوق محفوظة' | trans }}</span>
+            <div class="footer__payments">
+                {% for method in store.payment_methods %}
+                    <span>{{ method.name }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</footer>

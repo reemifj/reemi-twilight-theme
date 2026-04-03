@@ -1,0 +1,51 @@
+{# ═══════════════ THANK YOU PAGE ═══════════════ #}
+{% extends "layouts/master.twig" %}
+
+{% block title %}{{ 'شكراً لطلبك' | trans }} | {{ store.name }}{% endblock %}
+
+{% block content %}
+<div class="page-thankyou">
+    <div class="container">
+        <div class="thankyou-card">
+            <div class="thankyou-card__icon">
+                <i class="sicon-check-circle"></i>
+            </div>
+            <h1>{{ 'شكراً لك!' | trans }}</h1>
+            <p>{{ 'تم استلام طلبك بنجاح وسنقوم بمعالجته في أقرب وقت' | trans }}</p>
+
+            {% if order %}
+                <div class="thankyou-card__details">
+                    <div class="thankyou-card__row">
+                        <span>{{ 'رقم الطلب' | trans }}</span>
+                        <strong>#{{ order.reference_id }}</strong>
+                    </div>
+                    <div class="thankyou-card__row">
+                        <span>{{ 'الإجمالي' | trans }}</span>
+                        <strong>{{ order.total | money }}</strong>
+                    </div>
+                    <div class="thankyou-card__row">
+                        <span>{{ 'طريقة الدفع' | trans }}</span>
+                        <strong>{{ order.payment_method }}</strong>
+                    </div>
+                </div>
+
+                {# Payment Widget if needed #}
+                {% if order.payment_url %}
+                    <salla-payment-form order-id="{{ order.id }}"></salla-payment-form>
+                {% endif %}
+            {% endif %}
+
+            <div class="thankyou-card__actions">
+                {% if order %}
+                    <a href="{{ 'orders' | page_url }}/{{ order.id }}" class="btn btn--primary">
+                        {{ 'تفاصيل الطلب' | trans }}
+                    </a>
+                {% endif %}
+                <a href="{{ store.url }}" class="btn btn--outline">
+                    {{ 'متابعة التسوق' | trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{# ═══════════════ CUSTOMER PROFILE ═══════════════ #}
+{% extends "layouts/master.twig" %}
+
+{% block title %}{{ 'حسابي' | trans }} | {{ store.name }}{% endblock %}
+
+{% block content %}
+<div class="page-profile">
+    <div class="container">
+        <div class="page-header page-header--simple">
+            <h1>{{ 'حسابي' | trans }}</h1>
+        </div>
+        <div class="profile-layout">
+            {# Sidebar #}
+            <aside class="profile-sidebar">
+                <div class="profile-sidebar__user">
+                    <div class="profile-sidebar__avatar">
+                        <i class="sicon-user"></i>
+                    </div>
+                    <h3>{{ customer.name }}</h3>
+                    <p>{{ customer.email }}</p>
+                </div>
+                <nav class="profile-sidebar__nav">
+                    <a href="{{ 'profile' | page_url }}" class="active">
+                        <i class="sicon-user"></i> {{ 'الملف الشخصي' | trans }}
+                    </a>
+                    <a href="{{ 'orders' | page_url }}">
+                        <i class="sicon-shopping-bag"></i> {{ 'طلباتي' | trans }}
+                    </a>
+                    <a href="{{ 'wishlist' | page_url }}">
+                        <i class="sicon-heart"></i> {{ 'المفضلة' | trans }}
+                    </a>
+                    <a href="{{ 'notifications' | page_url }}">
+                        <i class="sicon-bell"></i> {{ 'الإشعارات' | trans }}
+                    </a>
+                </nav>
+            </aside>
+
+            {# Content #}
+            <div class="profile-content">
+                <salla-user-profile></salla-user-profile>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

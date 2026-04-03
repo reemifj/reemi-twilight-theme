@@ -1,0 +1,63 @@
+{
+  "version": "1.0.0",
+  "theme_name": "Reemi Jewellery",
+  "repo_url": "",
+  "support_url": "",
+  "settings": {
+    "topnav_is_dark": false,
+    "footer_is_dark": true,
+    "primary_color": "#B8860B",
+    "secondary_color": "#D4A843",
+    "primary_font": "Tajawal",
+    "secondary_font": "Playfair Display",
+    "hero_title_ar": "حيث يلتقي الفن بالأناقة",
+    "hero_subtitle_ar": "اكتشفي تشكيلتنا الفريدة من المجوهرات الراقية",
+    "hero_cta_text": "تسوّقي الآن",
+    "show_top_bar": true,
+    "top_bar_text_ar": "شحن مجاني داخل المملكة للطلبات فوق ٥٠٠ ريال",
+    "top_bar_text_en": "Free shipping in KSA for orders above 500 SAR",
+    "whatsapp_number": "966500000000",
+    "instagram_url": "https://instagram.com/reemi_jewellery",
+    "twitter_url": "",
+    "show_instagram_section": true,
+    "show_story_section": true,
+    "story_title_ar": "مجوهرات ريمي — إرث من الأناقة والإبداع",
+    "story_text_ar": "نؤمن في مجوهرات ريمي أن كل قطعة تحكي قصة فريدة. بدأت رحلتنا من شغف حقيقي بالجمال والحرفية العالية."
+  },
+  "features": [
+    "component-featured-products",
+    "component-products-slider",
+    "component-fixed-banner",
+    "component-store-features",
+    "component-testimonials",
+    "component-photos-slider",
+    "component-square-photos"
+  ],
+  "components": [
+    {
+      "name": "Hero Slider",
+      "path": "home.hero-slider",
+      "icon": "sicon-camera"
+    },
+    {
+      "name": "Categories Grid",
+      "path": "home.categories-grid",
+      "icon": "sicon-grid"
+    },
+    {
+      "name": "Story Section",
+      "path": "home.story-section",
+      "icon": "sicon-book-open"
+    },
+    {
+      "name": "Newsletter",
+      "path": "home.newsletter",
+      "icon": "sicon-envelope"
+    },
+    {
+      "name": "WhatsApp Button",
+      "path": "home.whatsapp-float",
+      "icon": "sicon-whatsapp"
+    }
+  ]
+}

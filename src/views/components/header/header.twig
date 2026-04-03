@@ -1,0 +1,89 @@
+{# ═══════════════ HEADER ═══════════════ #}
+<header class="header" id="header">
+    <div class="header__main">
+        {# Logo #}
+        <a href="{{ store.url }}" class="header__logo">
+            {% if store.logo %}
+                <img src="{{ store.logo }}" alt="{{ store.name }}" class="header__logo-img">
+            {% endif %}
+            <div class="header__brand">
+                <span class="header__brand-ar">{{ store.name }}</span>
+                <span class="header__brand-en">REEMI FOR JEWELLERY</span>
+            </div>
+        </a>
+
+        {# Navigation #}
+        <nav class="header__nav" id="mainNav">
+            {% for category in store.categories %}
+                <a href="{{ category.url }}" class="header__nav-link">
+                    {{ category.name }}
+                </a>
+            {% endfor %}
+            <a href="{{ 'about' | page_url }}" class="header__nav-link">
+                {{ 'قصتنا' | trans }}
+            </a>
+            <a href="{{ 'contact' | page_url }}" class="header__nav-link">
+                {{ 'تواصلي معنا' | trans }}
+            </a>
+        </nav>
+
+        {# Actions #}
+        <div class="header__actions">
+            {# Search #}
+            <button class="header__action-btn" onclick="salla.event.dispatch('search::open')" aria-label="Search">
+                <i class="sicon-search"></i>
+            </button>
+
+            {# Wishlist #}
+            <a href="{{ 'wishlist' | page_url }}" class="header__action-btn" aria-label="Wishlist">
+                <i class="sicon-heart"></i>
+            </a>
+
+            {# Cart #}
+            <button class="header__action-btn header__cart-btn" onclick="salla.cart.event.dispatch('open')" aria-label="Cart">
+                <i class="sicon-shopping-bag"></i>
+                <span class="header__cart-count" id="cartCount">
+                    {{ cart.count | default(0) }}
+                </span>
+            </button>
+
+            {# User #}
+            {% if customer %}
+                <a href="{{ 'profile' | page_url }}" class="header__action-btn" aria-label="Profile">
+                    <i class="sicon-user"></i>
+                </a>
+            {% else %}
+                <button class="header__action-btn" onclick="salla.event.dispatch('login::open')" aria-label="Login">
+                    <i class="sicon-user"></i>
+                </button>
+            {% endif %}
+
+            {# Mobile Menu Toggle #}
+            <button class="header__burger" id="menuToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+
+    {# Mobile Menu #}
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu__overlay" onclick="closeMobileMenu()"></div>
+        <div class="mobile-menu__drawer">
+            <div class="mobile-menu__header">
+                <span class="mobile-menu__title">{{ store.name }}</span>
+                <button class="mobile-menu__close" onclick="closeMobileMenu()">
+                    <i class="sicon-cancel"></i>
+                </button>
+            </div>
+            <div class="mobile-menu__links">
+                {% for category in store.categories %}
+                    <a href="{{ category.url }}">{{ category.name }}</a>
+                {% endfor %}
+                <a href="{{ 'about' | page_url }}">{{ 'قصتنا' | trans }}</a>
+                <a href="{{ 'contact' | page_url }}">{{ 'تواصلي معنا' | trans }}</a>
+            </div>
+        </div>
+    </div>
+</header>

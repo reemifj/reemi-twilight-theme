@@ -1,0 +1,31 @@
+{# ═══════════════ CATEGORIES GRID ═══════════════ #}
+{% if store.categories | length > 0 %}
+<section class="categories reveal" id="categories">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-header__tag">{{ 'اكتشفي عالمنا' | trans }}</span>
+            <h2 class="section-header__title">{{ 'تصنيفاتنا' | trans }}</h2>
+            <div class="section-header__line"></div>
+        </div>
+        <div class="categories__grid">
+            {% for category in store.categories | slice(0, 4) %}
+                <a href="{{ category.url }}" class="category-card">
+                    {% if category.image %}
+                        <img class="category-card__bg" src="{{ category.image }}" alt="{{ category.name }}" loading="lazy">
+                    {% else %}
+                        <div class="category-card__bg category-card__bg--placeholder"></div>
+                    {% endif %}
+                    <div class="category-card__overlay"></div>
+                    <div class="category-card__info">
+                        <h3>{{ category.name }}</h3>
+                        <span class="category-card__arrow">
+                            {{ 'استكشفي المجموعة' | trans }}
+                            <i class="sicon-keyboard_arrow_left"></i>
+                        </span>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}

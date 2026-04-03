@@ -1,0 +1,35 @@
+{# ═══════════════ BLOG LISTING ═══════════════ #}
+{% extends "layouts/master.twig" %}
+{% block title %}{{ 'المدونة' | trans }} | {{ store.name }}{% endblock %}
+{% block content %}
+<div class="page-blog">
+    <div class="container">
+        <div class="page-header page-header--simple">
+            <h1>{{ 'المدونة' | trans }}</h1>
+        </div>
+        {% if blogs | length > 0 %}
+            <div class="blog-grid">
+                {% for post in blogs %}
+                <a href="{{ post.url }}" class="blog-card">
+                    {% if post.image %}
+                        <div class="blog-card__img">
+                            <img src="{{ post.image }}" alt="{{ post.title }}" loading="lazy">
+                        </div>
+                    {% endif %}
+                    <div class="blog-card__content">
+                        <span class="blog-card__date">{{ post.date | date('d M Y') }}</span>
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.excerpt }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="products-empty">
+                <i class="sicon-book-open"></i>
+                <p>{{ 'لا توجد مقالات حالياً' | trans }}</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,94 @@
+{# ═══════════════ PRODUCTS LISTING PAGE ═══════════════ #}
+{% extends "layouts/master.twig" %}
+
+{% block title %}{{ category.name | default('المنتجات') }} | {{ store.name }}{% endblock %}
+
+{% block content %}
+<div class="page-products">
+    {# Page Header #}
+    <div class="page-header">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="{{ store.url }}">{{ 'الرئيسية' | trans }}</a>
+                <i class="sicon-keyboard_arrow_left"></i>
+                <span>{{ category.name | default('جميع المنتجات') }}</span>
+            </nav>
+            <h1 class="page-header__title">{{ category.name | default('تشكيلة المجوهرات') }}</h1>
+            {% if category.description %}
+                <p class="page-header__desc">{{ category.description }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="products-layout">
+            {# Sidebar Filters #}
+            <aside class="products-sidebar" id="filtersSidebar">
+                <div class="products-sidebar__header">
+                    <h3>{{ 'تصفية النتائج' | trans }}</h3>
+                    <button class="products-sidebar__close" onclick="closeFilters()">
+                        <i class="sicon-cancel"></i>
+                    </button>
+                </div>
+
+                {# Sort #}
+                <div class="filter-group">
+                    <h4>{{ 'ترتيب حسب' | trans }}</h4>
+                    <salla-filters-widget source="sort"></salla-filters-widget>
+                </div>
+
+                {# Categories #}
+                {% if store.categories | length > 0 %}
+                <div class="filter-group">
+                    <h4>{{ 'التصنيفات' | trans }}</h4>
+                    <salla-filters-widget source="categories"></salla-filters-widget>
+                </div>
+                {% endif %}
+
+                {# Price Range #}
+                <div class="filter-group">
+                    <h4>{{ 'السعر' | trans }}</h4>
+                    <salla-filters-widget source="price"></salla-filters-widget>
+                </div>
+            </aside>
+
+            {# Products Grid #}
+            <div class="products-main">
+                <div class="products-toolbar">
+                    <span class="products-toolbar__count">
+                        {{ products | length }} {{ 'منتج' | trans }}
+                    </span>
+                    <button class="products-toolbar__filter-btn" onclick="openFilters()">
+                        <i class="sicon-filter"></i>
+                        {{ 'تصفية' | trans }}
+                    </button>
+                </div>
+
+                <div class="products-grid" id="productsGrid">
+                    {% for product in products %}
+                        {% include 'components/product/card.twig' with {'product': product} %}
+                    {% endfor %}
+                </div>
+
+                {# Empty State #}
+                {% if products | length == 0 %}
+                    <div class="products-empty">
+                        <i class="sicon-shopping-bag"></i>
+                        <p>{{ 'لا توجد منتجات في هذا التصنيف حالياً' | trans }}</p>
+                        <a href="{{ store.url }}" class="btn btn--primary">{{ 'العودة للرئيسية' | trans }}</a>
+                    </div>
+                {% endif %}
+
+                {# Pagination #}
+                {% if products.links %}
+                    <salla-infinite-scroll>
+                        <div class="products-pagination">
+                            {{ products.links | raw }}
+                        </div>
+                    </salla-infinite-scroll>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

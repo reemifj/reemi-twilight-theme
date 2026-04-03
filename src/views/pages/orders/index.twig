@@ -1,0 +1,37 @@
+{# ═══════════════ ORDERS LIST ═══════════════ #}
+{% extends "layouts/master.twig" %}
+{% block title %}{{ 'طلباتي' | trans }} | {{ store.name }}{% endblock %}
+{% block content %}
+<div class="page-orders">
+    <div class="container">
+        <div class="page-header page-header--simple">
+            <h1>{{ 'طلباتي' | trans }}</h1>
+        </div>
+        {% if orders | length > 0 %}
+            <div class="orders-list">
+                {% for order in orders %}
+                <a href="{{ 'orders' | page_url }}/{{ order.id }}" class="order-card">
+                    <div class="order-card__header">
+                        <span class="order-card__id">#{{ order.reference_id }}</span>
+                        <span class="order-card__status order-card__status--{{ order.status.slug }}">{{ order.status.name }}</span>
+                    </div>
+                    <div class="order-card__body">
+                        <div class="order-card__info">
+                            <span>{{ 'التاريخ' | trans }}: {{ order.date | date('d/m/Y') }}</span>
+                            <span>{{ 'الإجمالي' | trans }}: {{ order.total | money }}</span>
+                            <span>{{ 'عدد المنتجات' | trans }}: {{ order.items_count }}</span>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="products-empty">
+                <i class="sicon-shopping-bag"></i>
+                <p>{{ 'لا توجد طلبات سابقة' | trans }}</p>
+                <a href="{{ 'products' | page_url }}" class="btn btn--primary">{{ 'تسوّقي الآن' | trans }}</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

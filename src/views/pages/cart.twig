@@ -1,0 +1,26 @@
+{# ═══════════════ CART PAGE ═══════════════ #}
+{% extends "layouts/master.twig" %}
+
+{% block title %}{{ 'سلة المشتريات' | trans }} | {{ store.name }}{% endblock %}
+
+{% block content %}
+<div class="page-cart">
+    <div class="container">
+        <div class="page-header page-header--simple">
+            <h1>{{ 'سلة المشتريات' | trans }}</h1>
+        </div>
+
+        <salla-cart-summary></salla-cart-summary>
+
+        {# Empty Cart State #}
+        <div class="cart-empty" id="cartEmpty" style="display:none;">
+            <i class="sicon-shopping-bag"></i>
+            <h3>{{ 'سلة المشتريات فارغة' | trans }}</h3>
+            <p>{{ 'لم تضيفي أي منتجات بعد. ابدئي التسوق الآن!' | trans }}</p>
+            <a href="{{ 'products' | page_url }}" class="btn btn--primary">
+                {{ 'تسوّقي الآن' | trans }}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{# ═══ SINGLE STATIC PAGE ═══ #}
+{% extends "layouts/master.twig" %}
+{% block title %}{{ page.title }} | {{ store.name }}{% endblock %}
+{% block content %}
+<div class="page-static">
+    <div class="container container--narrow">
+        <h1>{{ page.title }}</h1>
+        <div class="page-static__content">{{ page.content | raw }}</div>
+    </div>
+</div>
+{% endblock %}

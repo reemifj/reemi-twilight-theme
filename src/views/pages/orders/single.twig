@@ -1,0 +1,23 @@
+{# ═══════════════ ORDER DETAILS ═══════════════ #}
+{% extends "layouts/master.twig" %}
+{% block title %}{{ 'طلب' | trans }} #{{ order.reference_id }} | {{ store.name }}{% endblock %}
+{% block content %}
+<div class="page-order-single">
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="{{ store.url }}">{{ 'الرئيسية' | trans }}</a>
+            <i class="sicon-keyboard_arrow_left"></i>
+            <a href="{{ 'orders' | page_url }}">{{ 'طلباتي' | trans }}</a>
+            <i class="sicon-keyboard_arrow_left"></i>
+            <span>#{{ order.reference_id }}</span>
+        </nav>
+
+        <div class="page-header page-header--simple">
+            <h1>{{ 'تفاصيل الطلب' | trans }} #{{ order.reference_id }}</h1>
+            <span class="order-card__status order-card__status--{{ order.status.slug }}">{{ order.status.name }}</span>
+        </div>
+
+        <salla-order-details order-id="{{ order.id }}"></salla-order-details>
+    </div>
+</div>
+{% endblock %}
