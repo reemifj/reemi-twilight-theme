@@ -1,72 +1,17 @@
 <!DOCTYPE html>
-<html lang="{{ store.locale }}" dir="{{ store.locale == 'ar' ? 'rtl' : 'ltr' }}">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    {# SEO Hooks #}
-    {% hook 'head:start' %}
-
-    <title>{% block title %}{{ store.name }}{% endblock %}</title>
-
-    {# Fonts #}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500;600&family=Tajawal:wght@200;300;400;500;700;800&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-    {# Salla Icons #}
-    <link rel="stylesheet" href="{{ 'salla-icons' | asset }}">
-
-    {# Theme Styles #}
-    <link rel="stylesheet" href="{{ 'app.css' | asset }}">
-
-    {# Styles Block for pages #}
-    {% block styles %}{% endblock %}
-
-    {# Head Block for pages #}
-    {% block head %}{% endblock %}
-
-    {% hook 'head:end' %}
+    <meta name="description" content="Your SEO meta description here">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Font1&family=Font2&family=Font3&display=swap" rel="stylesheet">
+    <title>Your Title Here</title>
 </head>
-<body class="reemi-theme {% block body_class %}{% endblock %}">
-    {% hook 'body:start' %}
-
-    {# ═══ TOP BAR ═══ #}
-    {% if theme.settings.show_top_bar %}
-    <div class="top-bar">
-        <div class="container">
-            {{ store.locale == 'ar' ? theme.settings.top_bar_text_ar : theme.settings.top_bar_text_en }}
-        </div>
-    </div>
-    {% endif %}
-
-    {# ═══ HEADER ═══ #}
-    {% include 'components/header/header.twig' %}
-
-    {# ═══ MAIN CONTENT ═══ #}
-    <main id="main-content">
-        {% block content %}{% endblock %}
+<body>
+    <main role="main">
+        <!-- Main content goes here -->
     </main>
-
-    {# ═══ FOOTER ═══ #}
-    {% include 'components/footer/footer.twig' %}
-
-    {# ═══ WHATSAPP FLOAT ═══ #}
-    {% if theme.settings.whatsapp_number %}
-    {% include 'components/home/whatsapp-float.twig' %}
-    {% endif %}
-
-    {# ═══ SCROLL TO TOP ═══ #}
-    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
-        <i class="sicon-keyboard_arrow_up"></i>
-    </button>
-
-    {# Theme Scripts #}
-    <script src="{{ 'app.js' | asset }}"></script>
-
-    {# Script Block for pages #}
-    {% block scripts %}{% endblock %}
-
-    {% hook 'body:end' %}
 </body>
 </html>
